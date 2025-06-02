@@ -1,3 +1,4 @@
+# cliente/main.py
 from kivy.app import App
 from cliente.interfaz import InterfazChat
 

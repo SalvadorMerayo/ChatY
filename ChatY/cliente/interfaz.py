@@ -1,33 +1,47 @@
+# cliente/interfaz.py
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
-from kivy.uix.label import Label
-from kivy.clock import Clock
-from cliente.chat import ClienteChat
 
-class InterfazChat(BoxLayout):
+class MenuInicio(Screen):
     def __init__(self, **kwargs):
-        super().__init__(orientation='vertical', **kwargs)
+        super().__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical')
+        layout.add_widget(Button(text="Iniciar sesión", on_press=self.ir_a_login))
+        layout.add_widget(Button(text="Registrarse", on_press=self.ir_a_registro))
+        layout.add_widget(Button(text="Ajustes", on_press=self.ir_a_ajustes))
+        layout.add_widget(Button(text="Ayuda", on_press=self.ir_a_ayuda))
+        self.add_widget(layout)
 
-        self.mensajes = Label(size_hint_y=8)
-        self.add_widget(self.mensajes)
+    def ir_a_login(self, instance):
+        self.manager.current = 'login'
 
-        self.entrada = TextInput(size_hint_y=1, multiline=False)
-        self.add_widget(self.entrada)
+    def ir_a_registro(self, instance):
+        self.manager.current = 'registro'
 
-        boton = Button(text="Enviar", size_hint_y=1)
-        boton.bind(on_press=self.enviar)
-        self.add_widget(boton)
+    def ir_a_ajustes(self, instance):
+        self.manager.current = 'ajustes'
 
-        self.cliente = ClienteChat(self.actualizar_mensajes)
+    def ir_a_ayuda(self, instance):
+        self.manager.current = 'ayuda'
 
-    def enviar(self, _):
-        texto = self.entrada.text
-        self.cliente.enviar_mensaje(texto)
-        self.entrada.text = ''
-        self.actualizar_mensajes(texto)
+class PantallaLogin(Screen):
+    pass
 
-    def actualizar_mensajes(self, texto):
-        self.mensajes.text += texto + '\n'
-        
-class InterfazLogin(BoxLayout):
+class PantallaRegistro(Screen):
+    pass
+
+class PantallaAjustes(Screen):
+    pass
+
+class PantallaAyuda(Screen):
+    pass
+
+class InterfazChat(ScreenManager):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.add_widget(MenuInicio(name='menu'))
+        self.add_widget(PantallaLogin(name='login'))
+        self.add_widget(PantallaRegistro(name='registro'))
+        self.add_widget(PantallaAjustes(name='ajustes'))
+        self.add_widget(PantallaAyuda(name='ayuda'))
