@@ -29,3 +29,5 @@ class InterfazChat(BoxLayout):
 
     def actualizar_mensajes(self, texto):
         self.mensajes.text += texto + '\n'
+        
+class InterfazLogin(BoxLayout):
