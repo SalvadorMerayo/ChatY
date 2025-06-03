@@ -8,7 +8,7 @@ from kivy.uix.textinput import TextInput
 class MenuInicio(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        layout = BoxLayout(orientation='vertical')
+        layout = BoxLayout(orientation='vertical', size_hint=(.8, .8), pos_hint={'center_x': .5, 'center_y': .5})
         layout.add_widget(Button(text="Iniciar sesión", on_press=self.ir_a_login))
         layout.add_widget(Button(text="Registrarse", on_press=self.ir_a_registro))
         layout.add_widget(Button(text="Ajustes", on_press=self.ir_a_ajustes))
@@ -32,7 +32,7 @@ class MenuInicio(Screen):
 class PantallaLogin(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        layout = BoxLayout(orientation='vertical')
+        layout = BoxLayout(orientation='vertical', size_hint=(.8, .8), pos_hint={'center_x': .5, 'center_y': .5})
         layout.add_widget(Label(text="Usuario"))
         layout.add_widget(TextInput(multiline=False))
         layout.add_widget(Label(text="Contraseña"))
@@ -45,7 +45,7 @@ class PantallaLogin(Screen):
 class PantallaRegistro(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        layout = BoxLayout(orientation='vertical')
+        layout = BoxLayout(orientation='vertical', size_hint=(.8, .8), pos_hint={'center_x': .5, 'center_y': .5})
         layout.add_widget(Label(text="Nombre de usuario"))
         layout.add_widget(TextInput(multiline=False))
         layout.add_widget(Label(text="Correo electrónico"))
@@ -60,7 +60,7 @@ class PantallaRegistro(Screen):
 class PantallaAjustes(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        layout = BoxLayout(orientation='vertical')
+        layout = BoxLayout(orientation='vertical', size_hint=(.8, .8), pos_hint={'center_x': .5, 'center_y': .5})
         layout.add_widget(Label(text="Ajustes de la aplicación"))
         layout.add_widget(Button(text="Volver"))
         self.add_widget(layout)
@@ -70,7 +70,7 @@ class PantallaAjustes(Screen):
 class PantallaAyuda(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        layout = BoxLayout(orientation='vertical')
+        layout = BoxLayout(orientation='vertical', size_hint=(.8, .8), pos_hint={'center_x': .5, 'center_y': .5})
         layout.add_widget(Label(text="¿Necesitás ayuda? Contactanos en soporte@chaty.com"))
         layout.add_widget(Button(text="Volver"))
         self.add_widget(layout)
