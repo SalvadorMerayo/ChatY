@@ -1,8 +1,10 @@
-# cliente/interfaz.py
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
 
+# Menú principal con navegación
 class MenuInicio(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -25,18 +27,56 @@ class MenuInicio(Screen):
     def ir_a_ayuda(self, instance):
         self.manager.current = 'ayuda'
 
+
+# Pantalla de inicio de sesión
 class PantallaLogin(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical')
+        layout.add_widget(Label(text="Usuario"))
+        layout.add_widget(TextInput(multiline=False))
+        layout.add_widget(Label(text="Contraseña"))
+        layout.add_widget(TextInput(password=True, multiline=False))
+        layout.add_widget(Button(text="Iniciar sesión"))
+        self.add_widget(layout)
 
+
+# Pantalla de registro
 class PantallaRegistro(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical')
+        layout.add_widget(Label(text="Nombre de usuario"))
+        layout.add_widget(TextInput(multiline=False))
+        layout.add_widget(Label(text="Correo electrónico"))
+        layout.add_widget(TextInput(multiline=False))
+        layout.add_widget(Label(text="Contraseña"))
+        layout.add_widget(TextInput(password=True, multiline=False))
+        layout.add_widget(Button(text="Registrarse"))
+        self.add_widget(layout)
 
+
+# Pantalla de ajustes
 class PantallaAjustes(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical')
+        layout.add_widget(Label(text="Ajustes de la aplicación"))
+        layout.add_widget(Button(text="Volver"))
+        self.add_widget(layout)
 
+
+# Pantalla de ayuda
 class PantallaAyuda(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        layout = BoxLayout(orientation='vertical')
+        layout.add_widget(Label(text="¿Necesitás ayuda? Contactanos en soporte@chaty.com"))
+        layout.add_widget(Button(text="Volver"))
+        self.add_widget(layout)
 
+
+# Gestor de pantallas
 class InterfazChat(ScreenManager):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
