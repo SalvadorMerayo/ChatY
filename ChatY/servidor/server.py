@@ -1,3 +1,5 @@
+# cd C:\Users\salva\Documents\GitHub\CHATY\Chaty\servidor
+# python server.py
 import socket
 import threading
 

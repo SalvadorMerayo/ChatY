@@ -1,4 +1,6 @@
 # cliente/main.py
+# cd C:\Users\salva\Documents\GitHub\CHATY\Chaty
+# $env:PYTHONPATH="."; python cliente/main.py
 from kivy.app import App
 from cliente.interfaz import InterfazChat
 
