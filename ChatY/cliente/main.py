@@ -1,12 +1,13 @@
 # cliente/main.py
 # cd C:\Users\salva\Documents\GitHub\CHATY\Chaty
 # $env:PYTHONPATH="."; python cliente/main.py
-from kivy.app import App
-from cliente.interfaz import InterfazChat
+from kivymd.app import MDApp
+from kivy.lang import Builder
 
-class ChatYApp(App):
+class ChatYApp(MDApp):
     def build(self):
-        return InterfazChat()
+        self.title = "ChatY"
+        return Builder.load_file("interfaz.kv")
 
 if __name__ == '__main__':
     ChatYApp().run()

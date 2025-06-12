@@ -1,0 +1,139 @@
+MDScreenManager:
+    MenuInicio:
+    PantallaLogin:
+    PantallaRegistro:
+    PantallaAjustes:
+    PantallaAyuda:
+
+<MenuInicio@MDScreen>:
+    name: 'menu'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        size_hint: 0.8, 0.8
+
+        MDLabel:
+            text: "Bienvenido a ChatY"
+            halign: "center"
+            font_style: "H5"
+
+        MDRaisedButton:
+            text: "Iniciar sesión"
+            on_press: root.manager.current = 'login'
+            pos_hint: {"center_x": 0.5}
+
+        MDRaisedButton:
+            text: "Registrarse"
+            on_press: root.manager.current = 'registro'
+            pos_hint: {"center_x": 0.5}
+
+        MDRaisedButton:
+            text: "Ajustes"
+            on_press: root.manager.current = 'ajustes'
+            pos_hint: {"center_x": 0.5}
+
+        MDRaisedButton:
+            text: "Ayuda"
+            on_press: root.manager.current = 'ayuda'
+            pos_hint: {"center_x": 0.5}
+
+
+<PantallaLogin@MDScreen>:
+    name: 'login'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        size_hint: 0.8, 0.8
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            text: "Iniciar sesión"
+            halign: "center"
+            font_style: "H5"
+
+        MDTextField:
+            hint_text: "Usuario"
+            mode: "rectangle"
+
+        MDTextField:
+            hint_text: "Contraseña"
+            password: True
+            mode: "rectangle"
+
+        MDRaisedButton:
+            text: "Entrar"
+            pos_hint: {"center_x": 0.5}
+
+
+<PantallaRegistro@MDScreen>:
+    name: 'registro'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        size_hint: 0.8, 0.8
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            text: "Registro"
+            halign: "center"
+            font_style: "H5"
+
+        MDTextField:
+            hint_text: "Nombre de usuario"
+            mode: "rectangle"
+
+        MDTextField:
+            hint_text: "Correo electrónico"
+            mode: "rectangle"
+
+        MDTextField:
+            hint_text: "Contraseña"
+            password: True
+            mode: "rectangle"
+
+        MDRaisedButton:
+            text: "Registrarse"
+            pos_hint: {"center_x": 0.5}
+
+
+<PantallaAjustes@MDScreen>:
+    name: 'ajustes'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        size_hint: 0.8, 0.8
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            text: "Ajustes"
+            halign: "center"
+            font_style: "H5"
+
+        MDRaisedButton:
+            text: "Volver"
+            pos_hint: {"center_x": 0.5}
+            on_press: root.manager.current = 'menu'
+
+
+<PantallaAyuda@MDScreen>:
+    name: 'ayuda'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        size_hint: 0.8, 0.8
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            text: "¿Necesitás ayuda?\nContactanos en soporte@chaty.com"
+            halign: "center"
+
+        MDRaisedButton:
+            text: "Volver"
+            pos_hint: {"center_x": 0.5}
+            on_press: root.manager.current = 'menu'
