@@ -15,7 +15,7 @@ MDScreenManager:
         size_hint: 0.8, 0.8
 
         MDLabel:
-            text: "Bienvenido a ChatY"
+            text: "INICIE SESION PARA COMENZAR"
             halign: "center"
             font_style: "H5"
 
@@ -78,19 +78,24 @@ MDScreenManager:
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
         MDLabel:
-            text: "Registro"
+            text: "REGISTRO"
             halign: "center"
             font_style: "H5"
+            theme_text_color: "Custom"
+            text_color: 0.2, 0.4, 1, 1
 
         MDTextField:
+            id: username_input
             hint_text: "Nombre de usuario"
             mode: "rectangle"
 
         MDTextField:
+            id: email_input
             hint_text: "Correo electrónico"
             mode: "rectangle"
 
         MDTextField:
+            id: password_input
             hint_text: "Contraseña"
             password: True
             mode: "rectangle"
@@ -98,7 +103,9 @@ MDScreenManager:
         MDRaisedButton:
             text: "Registrarse"
             pos_hint: {"center_x": 0.5}
-
+            md_bg_color: 0.0, 0.2, 0.6, 1
+            on_release:
+                app.registrar_usuario(username_input.text, email_input.text, password_input.text)
 
 <PantallaAjustes@MDScreen>:
     name: 'ajustes'
