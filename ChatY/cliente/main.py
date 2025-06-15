@@ -4,7 +4,7 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.screen import MDScreen
-from servidor.database import registrar_usuario
+from servidor.database import registrar_usuario, verificar_usuario
 import hashlib
 
 class MenuInicio(MDScreen):
@@ -20,6 +20,9 @@ class PantallaAjustes(MDScreen):
     pass
 
 class PantallaAyuda(MDScreen):
+    pass
+
+class PaginaInicio(MDScreen):
     pass
 
 class ChatYApp(MDApp):
@@ -42,6 +45,20 @@ class ChatYApp(MDApp):
             self.root.current = "login"
         else:
             print("El nombre de usuario ya está en uso.")
+
+    def iniciar_sesion(self, username, password):
+        if not username or not password:
+            print("Faltan datos")
+            return
+
+        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        valido = verificar_usuario(username, password_hash)
+
+        if valido:
+            print("Inicio de sesión exitoso.")
+            self.root.current = "inicio"
+        else:
+            print("Usuario o contraseña incorrectos.")
 
 if __name__ == '__main__':
     ChatYApp().run()

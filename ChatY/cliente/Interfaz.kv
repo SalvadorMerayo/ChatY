@@ -4,6 +4,7 @@ MDScreenManager:
     PantallaRegistro:
     PantallaAjustes:
     PantallaAyuda:
+    PaginaInicio:
 
 <MenuInicio@MDScreen>:
     name: 'menu'
@@ -40,7 +41,7 @@ MDScreenManager:
             pos_hint: {"center_x": 0.5}
 
 
-<PantallaLogin@MDScreen>:
+<PantallaLogin>:
     name: 'login'
     MDBoxLayout:
         orientation: 'vertical'
@@ -55,10 +56,12 @@ MDScreenManager:
             font_style: "H5"
 
         MDTextField:
+            id: login_user
             hint_text: "Usuario"
             mode: "rectangle"
 
         MDTextField:
+            id: login_pass
             hint_text: "Contraseña"
             password: True
             mode: "rectangle"
@@ -66,6 +69,9 @@ MDScreenManager:
         MDRaisedButton:
             text: "Entrar"
             pos_hint: {"center_x": 0.5}
+            on_release:
+                app.iniciar_sesion(login_user.text, login_pass.text)
+
 
 
 <PantallaRegistro@MDScreen>:
@@ -144,3 +150,23 @@ MDScreenManager:
             text: "Volver"
             pos_hint: {"center_x": 0.5}
             on_press: root.manager.current = 'menu'
+
+<PaginaInicio>:
+    name: 'inicio'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            text: "Bienvenido a ChatY"
+            halign: "center"
+            font_style: "H5"
+
+        MDRaisedButton:
+            text: "Cerrar sesión"
+            pos_hint: {"center_x": 0.5}
+            on_release:
+                app.root.current = 'menu'
+

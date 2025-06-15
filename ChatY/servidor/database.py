@@ -32,6 +32,15 @@ def registrar_usuario(username, email, password_hash):
     finally:
         conn.close()
 
+# Verifica si el usuario existe y la contraseña es correcta
+def verificar_usuario(username, password_hash):
+    conn = sqlite3.connect("usuarios.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM usuarios WHERE username = ? AND password = ?", (username, password_hash))
+    resultado = cursor.fetchone()
+    conn.close()
+    return resultado is not None
+
 if __name__ == "__main__":
     crear_base()
     print("Base de datos creada (o ya existente).")
