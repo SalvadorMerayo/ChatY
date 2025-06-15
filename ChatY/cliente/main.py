@@ -5,6 +5,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.screen import MDScreen
 from servidor.database import registrar_usuario, verificar_usuario
+from cliente.chat import ClienteChat
 import hashlib
 
 class MenuInicio(MDScreen):
@@ -30,6 +31,9 @@ class ChatYApp(MDApp):
         self.title = "ChatY"
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Blue"
+
+        self.cliente_chat = ClienteChat(self.actualizar_chat)
+
         return Builder.load_file("interfaz.kv")
 
     def registrar_usuario(self, username, email, password):
@@ -59,6 +63,16 @@ class ChatYApp(MDApp):
             self.root.current = "inicio"
         else:
             print("Usuario o contraseña incorrectos.")
+
+    def actualizar_chat(self, mensaje):
+        pantalla = self.root.get_screen('inicio')
+        salida = pantalla.ids.chat_output
+        salida.text += f"{mensaje}\n"
+
+    def enviar_chat(self, mensaje):
+        if mensaje.strip():
+            self.cliente_chat.enviar_mensaje(mensaje)
+            self.root.get_screen('inicio').ids.chat_input.text = ""
 
 if __name__ == '__main__':
     ChatYApp().run()

@@ -40,7 +40,6 @@ MDScreenManager:
             on_press: root.manager.current = 'ayuda'
             pos_hint: {"center_x": 0.5}
 
-
 <PantallaLogin>:
     name: 'login'
     MDBoxLayout:
@@ -71,8 +70,6 @@ MDScreenManager:
             pos_hint: {"center_x": 0.5}
             on_release:
                 app.iniciar_sesion(login_user.text, login_pass.text)
-
-
 
 <PantallaRegistro@MDScreen>:
     name: 'registro'
@@ -132,7 +129,6 @@ MDScreenManager:
             pos_hint: {"center_x": 0.5}
             on_press: root.manager.current = 'menu'
 
-
 <PantallaAyuda@MDScreen>:
     name: 'ayuda'
     MDBoxLayout:
@@ -153,20 +149,98 @@ MDScreenManager:
 
 <PaginaInicio>:
     name: 'inicio'
-    MDBoxLayout:
-        orientation: 'vertical'
-        padding: 40
-        spacing: 20
-        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+    BoxLayout:
+        orientation: 'horizontal'
 
-        MDLabel:
-            text: "Bienvenido a ChatY"
-            halign: "center"
-            font_style: "H5"
+        MDNavigationDrawer:
+            id: nav_drawer
+            size_hint_x: None
+            width: 280
+            anchor: 'left'
 
-        MDRaisedButton:
-            text: "Cerrar sesión"
-            pos_hint: {"center_x": 0.5}
-            on_release:
-                app.root.current = 'menu'
+            MDBoxLayout:
+                orientation: 'vertical'
+                spacing: 10
+                padding: 10
 
+                MDRaisedButton:
+                    text: "Cuenta"
+                    size_hint_y: None
+                    height: 50
+
+                MDRaisedButton:
+                    text: "Cerrar sesión"
+                    size_hint_y: None
+                    height: 50
+                    on_release: app.root.current = 'menu'
+
+                MDSeparator:
+                    height: 20
+
+                MDRaisedButton:
+                    text: "Foros y comunidades"
+                    size_hint_y: None
+                    height: 50
+
+                MDRaisedButton:
+                    text: "Chats privados"
+                    size_hint_y: None
+                    height: 50
+
+                MDRaisedButton:
+                    text: "Grupos privados"
+                    size_hint_y: None
+                    height: 50
+
+                MDRaisedButton:
+                    text: "Chat aleatorio"
+                    size_hint_y: None
+                    height: 50
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: None
+                height: 50
+                padding: 10
+                spacing: 10
+                pos_hint: {"right": 1}
+
+                Widget:
+
+                MDRaisedButton:
+                    text: "Ajustes"
+                    size_hint: None, None
+                    size: 100, 40
+                    on_release: root.manager.current = 'ajustes'
+
+                MDRaisedButton:
+                    text: "!"
+                    size_hint: None, None
+                    size: 40, 40
+                    on_release: root.manager.current = 'ayuda'
+
+            BoxLayout:
+                orientation: 'vertical'
+                padding: 10
+                spacing: 10
+
+                ScrollView:
+                    MDLabel:
+                        id: chat_output
+                        text: ""
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        halign: 'left'
+                        valign: 'top'
+                        text_size: self.width, None
+
+                MDTextField:
+                    id: chat_input
+                    hint_text: "Escribí tu mensaje..."
+                    mode: "rectangle"
+                    size_hint_y: None
+                    height: 50
+                    on_text_validate: app.enviar_chat(chat_input.text)
