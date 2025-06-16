@@ -1,10 +1,12 @@
 # cliente/main.py
 # cd C:\Users\salva\Documents\GitHub\CHATY\Chaty
 # $env:PYTHONPATH="."; python cliente/main.py
+
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.screen import MDScreen
-from servidor.database import registrar_usuario, verificar_usuario
+from servidor.database import registrar_usuario
+from cliente.login import validar_login
 from cliente.chat import ClienteChat
 import hashlib
 
@@ -31,9 +33,7 @@ class ChatYApp(MDApp):
         self.title = "ChatY"
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Blue"
-
         self.cliente_chat = ClienteChat(self.actualizar_chat)
-
         return Builder.load_file("interfaz.kv")
 
     def registrar_usuario(self, username, email, password):
@@ -51,18 +51,10 @@ class ChatYApp(MDApp):
             print("El nombre de usuario ya está en uso.")
 
     def iniciar_sesion(self, username, password):
-        if not username or not password:
-            print("Faltan datos")
-            return
-
-        password_hash = hashlib.sha256(password.encode()).hexdigest()
-        valido = verificar_usuario(username, password_hash)
-
+        valido, mensaje = validar_login(username, password)
+        print(mensaje)
         if valido:
-            print("Inicio de sesión exitoso.")
             self.root.current = "inicio"
-        else:
-            print("Usuario o contraseña incorrectos.")
 
     def actualizar_chat(self, mensaje):
         pantalla = self.root.get_screen('inicio')
